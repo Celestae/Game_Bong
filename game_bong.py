@@ -24,8 +24,8 @@ loading_screen = pygame.image.load("C:\\Users\\love-\\Pictures\\[アパタイト
 start_button = font.render("Start", True, "White")
 start_button_rectangle = start_button.get_rect(midtop = (width/2, 200))
 
-dead = font.render("Dead", True, "White" )
-dead_rectangle = dead.get_rect
+dead = font.render("Game Over", True, "White" )
+dead_rectangle = dead.get_rect(center = (width/2, height/2))
 
 #quit_button = font.render("Quit", True, "White")
 #quit_button_rectangle = quit_button.get_rect(midtop = (width/2, 800))
@@ -105,10 +105,16 @@ def game():
                 pipe_rectangle.y = random.choice(pipe_y_pos_possible)
             #    print(pipe_rectangle.y)
                 
-            #Collisions
+            #Collisions 
             if kirby_rectangle.colliderect(pipe_rectangle) or kirby_rectangle.y > 750 or kirby_rectangle.bottom < 0:
-                print("haha")
+                game_active = False
+            
+        else:
+            screen.blit(loading_screen,(0,0))
+            screen.blit(dead, dead_rectangle)
+
         
+
         
 
 
