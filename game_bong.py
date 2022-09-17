@@ -50,7 +50,7 @@ pipe_y_pos_possible = [620, 520, 420, 320, 220]
 def game():
     kirby_gravity = 0
     mouse_pos = pygame.mouse.get_pos()
-    
+    game_active = True
 
     while True:
         for event in pygame.event.get():
@@ -74,40 +74,40 @@ def game():
                 pygame.quit()
                 quit()
 
-        
-        #Show the surface
-        screen.blit(loading_screen,(0,0))
+        if game_active:
+            #Show the surface
+            screen.blit(loading_screen,(0,0))
 
 
-        #Button
-        screen.blit(start_button, start_button_rectangle)
-        #if start_button_rectangle.collidepoint(mouse_pos):
-        #    print(pygame.mouse.get_pressed())
+            #Button
+            screen.blit(start_button, start_button_rectangle)
+            #if start_button_rectangle.collidepoint(mouse_pos):
+            #    print(pygame.mouse.get_pressed())
 
-        #screen.blit(quit_button, start_button_rectangle)  
+            #screen.blit(quit_button, start_button_rectangle)  
 
-        
-
-        #Kirby
-
-            #Falling
-        kirby_gravity +=1
-        kirby_rectangle.bottom += kirby_gravity
-        screen.blit(kirby, kirby_rectangle)
-        #print(screen.blit(kirby, kirby_rectangle))
-
-
-        #Pipes
-        pipe_rectangle.left -= 6
-        screen.blit(pipe, pipe_rectangle)
-        if pipe_rectangle.left < 0:
-            pipe_rectangle.x = 1280
-            pipe_rectangle.y = random.choice(pipe_y_pos_possible)
-        #    print(pipe_rectangle.y)
             
-        #Collisions
-        if kirby_rectangle.colliderect(pipe_rectangle) or kirby_rectangle.y > 750 or kirby_rectangle.bottom < 0:
-            print("haha")
+            
+            #Kirby
+
+                #Falling
+            kirby_gravity +=1
+            kirby_rectangle.bottom += kirby_gravity
+            screen.blit(kirby, kirby_rectangle)
+            #print(screen.blit(kirby, kirby_rectangle))
+
+
+            #Pipes
+            pipe_rectangle.left -= 6
+            screen.blit(pipe, pipe_rectangle)
+            if pipe_rectangle.left < 0:
+                pipe_rectangle.x = 1280
+                pipe_rectangle.y = random.choice(pipe_y_pos_possible)
+            #    print(pipe_rectangle.y)
+                
+            #Collisions
+            if kirby_rectangle.colliderect(pipe_rectangle) or kirby_rectangle.y > 750 or kirby_rectangle.bottom < 0:
+                print("haha")
         
         
 
