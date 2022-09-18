@@ -15,6 +15,7 @@ height = 720
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Bong bong")
 clock = pygame.time.Clock()
+score_number = 0
 
 font = pygame.font.Font("C:\\Users\\love-\\Documents\\grand9k_pixel\\Grand9K Pixel.ttf", 50)
 
@@ -34,11 +35,11 @@ kirby = pygame.image.load("C:\\Users\\love-\\Pictures\\pixil-frame-0.png").conve
 kirby = pygame.transform.scale(kirby, (100, 100))
 kirby_rectangle = kirby.get_rect(topleft = (200, 500))  
 
-
-
 pipe = pygame.image.load("C:\\Users\\love-\\Documents\\pipe-pixel-art.png").convert_alpha()
 pipe = pygame.transform.scale(pipe, (200, 600))
 pipe_rectangle = pipe.get_rect(bottomright = (1280, 1000))
+
+
   
 #kirby's position
 
@@ -49,8 +50,11 @@ pipe_y_pos_possible = [620, 520, 420, 320, 220]
 
 def game():
     kirby_gravity = 0
+    score_number = 0
     mouse_pos = pygame.mouse.get_pos()
     game_active = True
+    
+    
 
     while True:
         for event in pygame.event.get():
@@ -86,6 +90,11 @@ def game():
 
             #screen.blit(quit_button, start_button_rectangle)  
 
+            #Score
+            score = font.render(f"Score: {score_number}", True, "White")
+            score_rectangle = score.get_rect(center = (1100, 20))
+            screen.blit(score, score_rectangle)
+
             
             
             #Kirby
@@ -101,9 +110,10 @@ def game():
             pipe_rectangle.left -= 6
             screen.blit(pipe, pipe_rectangle)
             if pipe_rectangle.left < 0:
+                score_number += 1
                 pipe_rectangle.x = 1280
                 pipe_rectangle.y = random.choice(pipe_y_pos_possible)
-            #    print(pipe_rectangle.y)
+                print(score_number)
                 
             #Collisions 
             if kirby_rectangle.colliderect(pipe_rectangle) or kirby_rectangle.y > 750 or kirby_rectangle.bottom < 0:
