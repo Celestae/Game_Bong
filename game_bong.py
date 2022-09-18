@@ -3,6 +3,14 @@ import pygame
 from sys import exit
 import random
 
+#That's how you define a function within pygame
+def display_score():
+    current_time = pygame.time.get_ticks() #gives the time in miliseconds
+    score_surf = font.render(str(int(current_time/1000)), True, "White")
+    score_surf_rectangle = score_surf.get_rect(center = (1100, 20))
+    screen.blit(score_surf, score_surf_rectangle)
+    print(current_time)
+
 pygame.init()
 
 # The size of the game's window
@@ -85,15 +93,16 @@ def game():
 
             #Button
             screen.blit(start_button, start_button_rectangle)
+            display_score()
             #if start_button_rectangle.collidepoint(mouse_pos):
             #    print(pygame.mouse.get_pressed())
 
             #screen.blit(quit_button, start_button_rectangle)  
 
             #Score
-            score = font.render(f"Score: {score_number}", True, "White")
-            score_rectangle = score.get_rect(center = (1100, 20))
-            screen.blit(score, score_rectangle)
+            #score = font.render(f"Score: {score_number}", True, "White")
+            #score_rectangle = score.get_rect(center = (1100, 20))
+            #screen.blit(score, score_rectangle)
 
             
             
@@ -104,7 +113,6 @@ def game():
             kirby_rectangle.bottom += kirby_gravity
             screen.blit(kirby, kirby_rectangle)
             #print(screen.blit(kirby, kirby_rectangle))
-
 
             #Pipes
             pipe_rectangle.left -= 6
@@ -121,7 +129,7 @@ def game():
             
         else:
             screen.blit(loading_screen,(0,0))
-            screen.blit(dead, dead_rectangle)
+            screen.blit(dead, dead_rectangle) 
 
         
 
